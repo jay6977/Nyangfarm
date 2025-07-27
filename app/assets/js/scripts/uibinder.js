@@ -69,7 +69,7 @@ async function showMainUI(data){
     refreshServerStatus()
     setTimeout(() => {
         document.getElementById('frameBar').style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-        document.body.style.backgroundImage = `url('assets/images/backgrounds/${document.body.getAttribute('bkid')}.jpg')`
+        // document.body.style.backgroundImage = `url('assets/images/backgrounds/${document.body.getAttribute('bkid')}.jpg')`
         $('#main').show()
 
         const isLoggedIn = Object.keys(ConfigManager.getAuthAccounts()).length > 0
@@ -464,3 +464,25 @@ async function devModeToggle() {
     updateSelectedServer(data.servers[0])
     syncModConfigurations(data)
 }
+
+async function setLoadingBackground() {
+    document.body.style.backgroundImage = `url('assets/images/backgrounds/${document.body.getAttribute('bkid')}.jpg')`
+}
+
+async function updateBackground() {
+    fetch('https://github.com/jay6977/Nyangfarm/raw/main/app/assets/js/scripts/images.json') 
+        .then(response => response.json())
+        .then(data => {
+            const images = data.images;
+            const randomIndex = Math.floor(Math.random() * images.length);
+            const imageUrl = images[randomIndex];
+            setTimeout(() => {
+                document.body.style.backgroundImage = `url('${imageUrl}')`;
+            }, 5000);
+        })
+        .catch(error => console.error('Error fetching images:', error));
+}
+document.addEventListener('DOMContentLoaded', function(){
+    updateBackground();
+    setLoadingBackground();
+});
