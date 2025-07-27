@@ -466,7 +466,7 @@ async function devModeToggle() {
 }
 
 async function setLoadingBackground() {
-    document.body.style.backgroundImage = `url('assets/images/backgrounds/${document.body.getAttribute('bkid')}.jpg')`
+    document.body.style.backgroundImage = `url('assets/images/backgrounds/0.jpg')`
 }
 
 async function updateBackground() {
